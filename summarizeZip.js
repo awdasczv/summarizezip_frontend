@@ -1,11 +1,33 @@
 // const state = 'paragraphSummarize';
 // const lang = 'ko';
+(() => {
+  const $summarizeZipWrapper = document.getElementById('summarizeZipWrapper');
 
-const $html = document.documentElement;
+  const isWrapperExisted = selector => selector !== null;
 
-$html.setAttribute('data-summarizeZip-active', 'true');
+  const getWidget = () => {
+    const $html = document.documentElement;
+    $html.setAttribute('data-summarizeZip-active', 'true');
 
-const $div = document.createElement('div');
-$div.setAttribute('id', 'summarizeZipWrapper');
+    const $div = document.createElement('div');
+    $div.setAttribute('id', 'summarizeZipWrapper');
 
-document.body.insertAdjacentElement('beforebegin', $div);
+    document.body.insertAdjacentElement('beforebegin', $div);
+  };
+
+  if (isWrapperExisted($summarizeZipWrapper)) {
+    const widget = document.getElementById('summarizeZipWrapper');
+    const widgetParent = widget.parentNode;
+
+    widgetParent.removeChild(widget);
+    widgetParent.removeAttribute('data-summarizezip-active');
+  } else {
+    getWidget();
+  }
+
+  // click시 이벤트
+  document.body.addEventListener('click', e => {
+    const text = e.target.textContent;
+    const arr = text.split('\n');
+  });
+})();
