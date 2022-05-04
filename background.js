@@ -9,13 +9,10 @@ chrome.runtime.onInstalled.addListener(() => {
 const injectSummarizeZip = async tab => {
   tabId = tab.id;
 
-  await chrome.scripting.executeScript(
-    {
-      target: { tabId },
-      files: ['summarizeZip.js'],
-    }
-    // showSummarizeZip
-  );
+  await chrome.scripting.executeScript({
+    target: { tabId },
+    files: ['summarizeZip.js'],
+  });
 
   await chrome.scripting.insertCSS({
     target: { tabId },
@@ -24,15 +21,3 @@ const injectSummarizeZip = async tab => {
 };
 
 chrome.action.onClicked.addListener(injectSummarizeZip);
-console.log('hi');
-
-// const showSummarizeZip = () => {
-//   console.log('hi');
-//   sendActionToSummarizeZip();
-// };
-
-// const sendActionToSummarizeZip = () => {
-//   chrome.tabs.query({ active: true, currentWindow: true }, tabs => {
-//     chrome.tabs.sendMessage(tabs[0].id, { text: 'test' });
-//   });
-// };
